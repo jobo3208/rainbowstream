@@ -179,6 +179,12 @@ def draw(t, keyword=None, humanize=True, noti=False, fil=[], ig=[]):
     """
     Draw the rainbow
     """
+    # If tweet quotes another, draw that.
+    if 'quoted_status' in t:
+        draw(t['quoted_status'])
+        printNicely('')
+        noti = True
+
     # Check config
     check_config()
 
