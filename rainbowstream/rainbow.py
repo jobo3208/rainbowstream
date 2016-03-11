@@ -522,6 +522,26 @@ def conversation():
     printNicely('')
 
 
+def see():
+    """
+    View a particular tweet by URL or ID
+    """
+    t = Twitter(auth=authen())
+    try:
+        arg = g['stuff'].split()[0]
+        if '/' in arg:
+            tid = int(arg.rsplit('/', 1)[1])
+        else:
+            id = int(arg)
+            tid = c['tweet_dict'][id]
+    except:
+        printNicely(red('Sorry I can\'t understand.'))
+        return
+    tweet = t.statuses.show(id=tid)
+    draw(t=tweet)
+    printNicely('')
+
+
 def reply():
     """
     Reply
@@ -1490,6 +1510,8 @@ def help_tweets():
         light_yellow('[id=12]') + '.\n'
     usage += s * 2 + light_green('conversation 12') + ' will show the chain of ' + \
         'replies prior to the tweet with ' + light_yellow('[id=12]') + '.\n'
+    usage += s * 2 + light_green('see 12') + ' will display tweet with ' + \
+        light_yellow('[id=12]') + '. Tweet\'s URL can also be used.\n'
     usage += s * 2 + light_green('rep 12 oops') + ' will reply "' + \
         light_yellow('oops') + '" to the owner of the tweet with ' + \
         light_yellow('[id=12]') + '.\n'
@@ -1781,6 +1803,7 @@ cmdset = [
     'me',
     'allrt',
     'conversation',
+    'see',
     'fav',
     'rep',
     'repall',
@@ -1830,6 +1853,7 @@ funcset = [
     view_my_tweets,
     allretweet,
     conversation,
+    see,
     favorite,
     reply,
     reply_all,
@@ -1892,6 +1916,7 @@ def listen():
             [],  # view_my_tweets
             [],  # allretweet
             [],  # conversation
+            [],  # see
             [],  # favorite
             [],  # reply
             [],  # reply_all
