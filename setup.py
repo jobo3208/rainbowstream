@@ -1,9 +1,15 @@
 from setuptools import setup, find_packages
 import os
 import os.path
+import sys
+
+if sys.version[0] == "2":
+    from pipes import quote
+else:
+    from shlex import quote
 
 # Bumped version
-version = '1.3.3'
+version = '1.3.4'
 
 # Require
 install_requires = [
@@ -16,10 +22,15 @@ install_requires = [
     "PySocks"
 ]
 
+# Default user (considers non virtualenv method)
+user = os.environ.get('SUDO_USER', os.environ['USER'])
+
 # Copy default config if not exists
 default = os.path.expanduser("~") + os.sep + '.rainbow_config.json'
 if not os.path.isfile(default):
     cmd = 'cp rainbowstream/colorset/config ' + default
+    os.system(cmd)
+    cmd = 'chown ' + quote(user) + ' ' + default
     os.system(cmd)
     cmd = 'chmod 777 ' + default
     os.system(cmd)
@@ -39,6 +50,7 @@ setup(name='rainbowstream',
           "Programming Language :: Python :: 3.2",
           "Programming Language :: Python :: 3.3",
           "Programming Language :: Python :: 3.4",
+          "Programming Language :: Python :: 3.5",
           "Topic :: Internet :: WWW/HTTP :: Dynamic Content :: CGI Tools/Libraries",
           "Topic :: Utilities",
           "License :: OSI Approved :: MIT License",

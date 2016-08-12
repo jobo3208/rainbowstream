@@ -279,7 +279,8 @@ def draw(t, keyword=None, humanize=True, noti=False, fil=[], ig=[]):
     if favorited:
         fav = color_func(c['TWEET']['favorited'])(u'\u2605')
 
-    tweet = text.split()
+    tweet = text.split(' ')
+    tweet = [x for x in tweet if x != '']
     # Replace url
     if expanded_url:
         for index in xrange(len(expanded_url)):
@@ -295,17 +296,18 @@ def draw(t, keyword=None, humanize=True, noti=False, fil=[], ig=[]):
         else x,
         tweet)
     # Highlight screen_name
-    tweet = lmap(lambda x: cycle_color(x) if x[0] == '@' else x, tweet)
+    tweet = lmap(
+        lambda x: cycle_color(x) if x.lstrip().startswith('@') else x, tweet)
     # Highlight link
     tweet = lmap(
         lambda x: color_func(c['TWEET']['link'])(x)
-        if x.startswith('http')
+        if x.lstrip().startswith('http')
         else x,
         tweet)
     # Highlight hashtag
     tweet = lmap(
         lambda x: color_func(c['TWEET']['hashtag'])(x)
-        if x.startswith('#')
+        if x.lstrip().startswith('#')
         else x,
         tweet)
     # Highlight my tweet
@@ -314,11 +316,12 @@ def draw(t, keyword=None, humanize=True, noti=False, fil=[], ig=[]):
                  for x in tweet
                  if not any([
                      x == 'RT',
-                     x.startswith('http'),
-                     x.startswith('#')])
+                     x.lstrip().startswith('http'),
+                     x.lstrip().startswith('#')])
                  ]
     # Highlight keyword
     tweet = ' '.join(tweet)
+    tweet = '\n  '.join(tweet.split('\n'))
     if keyword:
         roj = re.search(keyword, tweet, re.IGNORECASE)
         if roj:

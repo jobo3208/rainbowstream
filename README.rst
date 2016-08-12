@@ -7,7 +7,7 @@ Rainbow Stream
 .. image:: http://img.shields.io/pypi/v/rainbowstream.svg?style=flat-square
    :target: https://pypi.python.org/pypi/rainbowstream
 
-Terminal-based Twitter Client. Realtime tweetstream, compose, search ,
+Terminal-based Twitter Client. Realtime tweetstream, compose, search,
 favorite … and much more fun directly from terminal.
 
 This package is built on the top of `Python Twitter Tool`_ and `Twitter API`_,
@@ -59,6 +59,12 @@ For debian-based distros, these can be installed with
 .. code:: bash
 
     sudo apt-get install python-dev libjpeg-dev libfreetype6 libfreetype6-dev zlib1g-dev
+
+For CentOS:
+
+.. code:: bash
+
+    sudo yum install python-devel libjpeg-devel
 
 Besides, Mac OSX Maverick with Xcode 5.1 has a well-known `clang unknown argument`_ problem with
 the ``Pillow`` package installation - a dependency of this app.
