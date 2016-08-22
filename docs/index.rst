@@ -172,6 +172,8 @@ Here is full list of supported command:
 
 -  ``open 12`` will open url in tweet with *[id=12]* in your OS’s default browser.
 
+-  ``pt 12`` will add tweet with *[id=12]* in your Pocket list.
+
 **Direct Messages Commands**
 
 -  ``inbox`` will show inbox messages. ``inbox 7`` will show newest 7 messages.
@@ -404,6 +406,8 @@ You also can view or set a new value of every config key by ``config`` command (
     + ``#recipient_name``: Message's recipient name
     + ``#recipient_nick``: Message's recipient screen name
 
+- ``POCKET_SUPPORT`` : enable Pocket support.
+
 In every format, you can use unicode characters like ``\u2665``.
 Mac users also can use emoji characters as well (Ex: ``::zap::``).
 See `Emoji cheatsheet`_ for details.
@@ -417,7 +421,7 @@ steps
 -  `Create your own Twitter Application`_
 -  Get your Twitter application’s API key and secret
 -  Fork github's repo and clone in your system.
--  Create a file ``consumer.py`` in ```rainbowstream```_ folder with
+-  Create a file ``consumer.py`` in `rainbowstream`_ folder with
    following content
 
    .. code:: python
@@ -425,6 +429,7 @@ steps
        # Consumer information
        CONSUMER_KEY = 'APIKey' # Your Twitter application's API key
        CONSUMER_SECRET = 'APISecret' # Your Twitter application's API secret
+       PCKT_CONSUMER_KEY = 'PocketAPIKey' # Your Pocket application's API key
 
 -  Use pip to install in local
 
@@ -438,8 +443,11 @@ steps
        # Remove ~/.rainbow_oauth if exists
        rainbowstream # local version of rainbowstream
 
+.. _Python Twitter Tool: http://mike.verdone.ca/twitter/
+.. _Twitter API: https://dev.twitter.com/docs/api/1.1
 .. _Create your own Twitter Application: https://apps.twitter.com/app/new
-.. _``rainbowstream``: https://github.com/DTVD/rainbowstream/tree/master/rainbowstream
+.. _Create your own Pocket Application: https://getpocket.com/developer/apps/new
+.. _rainbowstream: https://github.com/DTVD/rainbowstream/tree/master/rainbowstream
 .. _Python Twitter Tool: http://mike.verdone.ca/twitter/
 .. _Twitter API: https://dev.twitter.com/docs/api/1.1
 .. _theme usage and customization: https://github.com/DTVD/rainbowstream/blob/master/theme.md
