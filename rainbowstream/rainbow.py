@@ -620,7 +620,7 @@ def see():
     except:
         printNicely(red('Sorry I can\'t understand.'))
         return
-    tweet = t.statuses.show(id=tid)
+    tweet = t.statuses.show(id=tid, tweet_mode='extended')
     draw(t=tweet)
     printNicely('')
 

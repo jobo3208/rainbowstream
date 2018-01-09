@@ -190,7 +190,10 @@ def draw(t, keyword=None, humanize=True, noti=False, fil=[], ig=[]):
 
     # Retrieve tweet
     tid = t['id']
-    text = t['text']
+    if 'full_text' in t:
+        text = t['full_text']
+    else:
+        text = t['text']
     screen_name = t['user']['screen_name']
     name = t['user']['name']
     created_at = t['created_at']
