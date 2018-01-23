@@ -625,6 +625,26 @@ def see():
     printNicely('')
 
 
+def st():
+    """
+    See through a particular RT to the status that was RT'd
+    """
+    t = Twitter(auth=authen())
+    try:
+        arg = g['stuff'].split()[0]
+        if '/' in arg:
+            tid = int(arg.rsplit('/', 1)[1])
+        else:
+            id = int(arg)
+            tid = c['tweet_dict'][id]
+    except:
+        printNicely(red('Sorry I can\'t understand.'))
+        return
+    tweet = t.statuses.show(id=tid, tweet_mode='extended')
+    draw(t=tweet['retweeted_status'])
+    printNicely('')
+
+
 def reply():
     """
     Reply
@@ -1617,6 +1637,8 @@ def help_tweets():
         'replies prior to the tweet with ' + light_yellow('[id=12]') + '.\n'
     usage += s * 2 + light_green('see 12') + ' will display tweet with ' + \
         light_yellow('[id=12]') + '. Tweet\'s URL can also be used.\n'
+    usage += s * 2 + light_green('st 12') + ' will display the status that tweet with ' + \
+        light_yellow('[id=12]') + ' retweeted. Tweet\'s URL can also be used.\n'
     usage += s * 2 + light_green('rep 12 oops') + ' will reply "' + \
         light_yellow('oops') + '" to the owner of the tweet with ' + \
         light_yellow('[id=12]') + '.\n'
@@ -1911,6 +1933,7 @@ cmdset = [
     'allrt',
     'conversation',
     'see',
+    'st',
     'fav',
     'rep',
     'repall',
@@ -1962,6 +1985,7 @@ funcset = [
     allretweet,
     conversation,
     see,
+    st,
     favorite,
     reply,
     reply_all,
@@ -2026,6 +2050,7 @@ def listen():
             [],  # allretweet
             [],  # conversation
             [],  # see
+            [],  # st
             [],  # favorite
             [],  # reply
             [],  # reply_all
